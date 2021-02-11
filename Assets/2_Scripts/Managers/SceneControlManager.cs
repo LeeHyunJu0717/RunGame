@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using System;
 
 public class SceneControlManager : MonoBehaviour
@@ -20,9 +20,6 @@ public class SceneControlManager : MonoBehaviour
         LoadingScene,
         LoadSceneEnd,
 
-        LoadStageStart,
-        LoadingStage,
-        LoadStageEnd,
         LoadEnd
     }
 
@@ -43,10 +40,48 @@ public class SceneControlManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        StartSceneMain();
+    }
+
+    public void StartSceneMain()
+    {
+        _oldSceneType = _nowSceneType;
+        _nowSceneType = SceneType.MAIN;
+
+        StartCoroutine(LoadingScene("MainScene"));
+    }
+
+    public void StartSceneInGame()
+    {
+        _oldSceneType = _nowSceneType;
+        _nowSceneType = SceneType.INGAME;
+
+        StartCoroutine(LoadingScene("MainScene"));
+    }
+
     IEnumerator LoadingScene(string SceneName)
     {
-        AsyncOperation async;
+        AsyncOperation aOper;
         Scene aScene;
+        // 로딩화면 생성
+
+        _currentStateLoad = LoadingState.LoadSceneStart;
+        aOper = SceneManager.LoadSceneAsync(SceneName);
+        while (aOper.isDone)
+        {
+            _currentStateLoad = LoadingState.LoadingScene;
+            yield return null;
+        }
+        _currentStateLoad = LoadingState.LoadSceneEnd;
+        aScene = SceneManager.GetSceneByName(SceneName);
+        yield return new WaitForSeconds(1);
+
+        SceneManager.SetActiveScene(aScene);
+
+        _currentStateLoad = LoadingState.LoadEnd;
+        //로딩화면 삭제
 
         yield return null;
     }
