@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\2_Scripts\Managers\MainSceneManager.cs" />
     <Compile Include="Assets\2_Scripts\Managers\SceneControlManager.cs" />
+    <Compile Include="Assets\2_Scripts\PositionForTest.cs" />
+    <Compile Include="Assets\2_Scripts\TotalScoreWindow.cs" />
     <Compile Include="Assets\Stylized Astronaut\Character\Player.cs" />
     <Compile Include="Assets\Stylized Astronaut\Character\ThirdPersonCamera.cs" />
     <None Include="Assets\Cartoon Temple Building Kit\ReadMe.txt" />

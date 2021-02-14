@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class MainSceneManager : MonoBehaviour
 {
+    [SerializeField] Transform parent;
+    GameObject ScoreWindow;
+
+    private void Awake()
+    {
+        ScoreWindow = Resources.Load("TotalScore Window") as GameObject;
+    }
+
     public void ClickPlayButton()
     {
         SceneControlManager._instance.StartSceneInGame();
@@ -11,6 +19,9 @@ public class MainSceneManager : MonoBehaviour
 
     public void ClickTotalScoreButton()
     {
-
+        if (GameObject.Find("TotalScore Window"))
+            ScoreWindow.SetActive(true);
+        else
+            Instantiate(ScoreWindow, parent);
     }
 }

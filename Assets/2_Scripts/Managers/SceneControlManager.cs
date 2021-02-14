@@ -50,7 +50,7 @@ public class SceneControlManager : MonoBehaviour
         _oldSceneType = _nowSceneType;
         _nowSceneType = SceneType.MAIN;
 
-        StartCoroutine(LoadingScene("MainScene"));
+        StartCoroutine(LoadingScene("2_MainScene"));
     }
 
     public void StartSceneInGame()
@@ -58,7 +58,7 @@ public class SceneControlManager : MonoBehaviour
         _oldSceneType = _nowSceneType;
         _nowSceneType = SceneType.INGAME;
 
-        StartCoroutine(LoadingScene("MainScene"));
+        StartCoroutine(LoadingScene("TestScene"));
     }
 
     IEnumerator LoadingScene(string SceneName)
